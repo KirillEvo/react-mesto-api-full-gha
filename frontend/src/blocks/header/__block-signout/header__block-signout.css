@@ -1,0 +1,12 @@
+.header__block-signout {
+  display: flex;
+  justify-content: flex-end;
+  gap: 24px;
+}
+@media screen and (max-width: 1024px) {
+  .header__block-signout {
+    display: none;
+    order: 0;
+    width: 100%;
+  }
+}

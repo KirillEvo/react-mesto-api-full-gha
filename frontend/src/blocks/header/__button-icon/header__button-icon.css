@@ -1,0 +1,19 @@
+.header__button-icon {
+  height: 100%;
+  background: none;
+  border: 0;
+  cursor: pointer;
+  display: none;
+  padding: 0;
+  display: none;
+  width: 50%;
+}
+@media screen and (max-width: 1024px) {
+  .header__button-icon {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    margin-right: 30px;
+    order: 2;
+  }
+}

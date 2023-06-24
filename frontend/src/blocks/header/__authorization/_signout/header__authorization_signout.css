@@ -1,0 +1,16 @@
+.header__authorization_signout {
+  color: #A9A9A9;
+  background: none;
+  border: 0;
+  cursor: pointer;
+  padding: 0;
+  line-height: 22px;
+  font-size: 18px;
+  font-family: 'Inter', Arial, sans-serif;
+  font-weight: 400;
+}
+@media screen and (max-width: 880px) {
+  .header__authorization_signout {
+    margin-right: 0px;
+  }
+}

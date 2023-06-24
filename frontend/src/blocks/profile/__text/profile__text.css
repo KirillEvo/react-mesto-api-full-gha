@@ -1,0 +1,18 @@
+.profile__text {
+  display: grid;
+  grid-template-areas:
+    "profile-title profile-button"
+    "profile-description profile-description";
+  align-items: center;
+  align-content: center;
+  gap: 16px 18px;
+  max-width: 336px;
+  flex-wrap: wrap;
+}
+@media screen and (max-width: 1024px) {
+    .profile__text {
+        justify-content: center;
+        gap: 7px 10px;
+        max-width: 282px;
+    }
+}

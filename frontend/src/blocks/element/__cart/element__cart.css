@@ -1,0 +1,13 @@
+.element__cart {
+  position: absolute;
+  background: url('../../../images/cart.svg') no-repeat center center;
+  min-width: 18px;
+  min-height: 19px;
+  border: 0;
+  top: 20px;
+  right: 20px;
+  cursor: pointer;
+}
+.element__cart:hover {
+  opacity: 0.6;
+}

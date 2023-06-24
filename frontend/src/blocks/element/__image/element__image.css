@@ -1,0 +1,7 @@
+.element__image {
+    object-fit: cover;
+    max-height: 282px;
+    min-height: 282px;
+    width: 282px;
+    cursor: pointer;
+}

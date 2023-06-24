@@ -1,0 +1,8 @@
+.header__icon-cross::before {
+  display: inline-block;
+  background: url(../../../images/cross.svg) no-repeat center center;
+  background-size: 24px 18px;
+  content: '';
+  height: 18px;
+  width: 24px;
+}

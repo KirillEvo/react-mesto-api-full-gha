@@ -1,0 +1,5 @@
+.authorization__form {
+  padding-top: 50px;
+  display: flex;
+  flex-direction: column;
+}
