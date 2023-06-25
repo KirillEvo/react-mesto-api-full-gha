@@ -36,35 +36,36 @@ app.use(cookieParser());
 // });
 
 // Массив доменов, с которых разрешены кросс-доменные запросы
-const allowedCors = [
-  'https://praktikum.tk',
-  'http://praktikum.tk',
-  'http://daily-pix.nomoreparties.sbs',
-  'https://daily-pix.nomoreparties.sbs',
-  'localhost:3000',
-];
-
-app.use((req, res, next) => {
-  const { origin } = req.headers; // Сохраняем источник запроса в переменную origin
-  if (allowedCors.includes(origin)) {
-    res.header('Access-Control-Allow-Origin', origin);
-    res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
-    res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
-    res.header('Access-Control-Allow-Credentials', true);
-  } else {
-    res.status(403).send({ message: 'Политика CORS для этого источника не разрешает доступ из определенного источника.' });
-    return;
-  }
-  next();
-});
+// const allowedCors = [
+//   'https://praktikum.tk',
+//   'http://praktikum.tk',
+//   'http://daily-pix.nomoreparties.sbs',
+//   'https://daily-pix.nomoreparties.sbs',
+//   'localhost:3000',
+// ];
 
 // app.use((req, res, next) => {
-//   res.header('Access-Control-Allow-Origin', '*');
-//   res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
-//   res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
-//   res.header('Access-Control-Allow-Credentials', true);
+//   const { origin } = req.headers; // Сохраняем источник запроса в переменную origin
+//   if (allowedCors.includes(origin)) {
+//     res.header('Access-Control-Allow-Origin', origin);
+//     res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+//     res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
+//     res.header('Access-Control-Allow-Credentials', true);
+//   } else {
+// eslint-disable-next-line max-len
+//     res.status(403).send({ message: 'Политика CORS для этого источника не разрешает доступ из определенного источника.' });
+//     return;
+//   }
 //   next();
 // });
+
+app.use((req, res, next) => {
+  res.header('Access-Control-Allow-Origin', '*');
+  res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+  res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
+  res.header('Access-Control-Allow-Credentials', true);
+  next();
+});
 
 // app.use(requestLogger);
 app.post('/signin', validateLogin, login);
