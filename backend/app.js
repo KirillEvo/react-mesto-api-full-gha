@@ -47,11 +47,13 @@ const allowedCors = [
 app.use((req, res, next) => {
   const { origin } = req.headers; // Сохраняем источник запроса в переменную origin
   if (allowedCors.includes(origin)) {
-    console.log(origin);
     res.header('Access-Control-Allow-Origin', origin);
     res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
     res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
     res.header('Access-Control-Allow-Credentials', true);
+  } else {
+    res.status(403).send({ message: 'Политика CORS для этого источника не разрешает доступ из определенного источника.' });
+    return;
   }
   next();
 });
