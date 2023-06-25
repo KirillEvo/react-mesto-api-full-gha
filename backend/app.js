@@ -38,6 +38,8 @@ app.use(cookieParser());
 const allowedCors = [
   'https://praktikum.tk',
   'http://praktikum.tk',
+  'http://daily-pix.nomoreparties.sbs',
+  'https://daily-pix.nomoreparties.sbs/',
   'localhost:3000',
 ];
 

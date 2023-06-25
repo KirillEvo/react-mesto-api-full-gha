@@ -39,7 +39,8 @@ function App() {
   const [cards, setCards] = useState([]);
 
   useEffect(() => {
-    Promise.all([Api.getUserInfo(), Api.getCard()])
+    if (isLoading) {
+      Promise.all([Api.getUserInfo(), Api.getCard()])
       .then((values) => {
         const [userData, cardsData] = values;
         setCurrentUser(userData);
@@ -48,7 +49,8 @@ function App() {
       .catch((err) => {
         console.log(`${err}`);
       });
-  }, []);
+    }
+  }, [isLoading]);
 
   function closeAllPopups() {
     setEditAvatarPopupOpen(false);
@@ -133,15 +135,31 @@ function App() {
   []);
 
 
+  // function handleTokenCheck() {
+  //   const token = localStorage.getItem("jwt");
+  //   if (token) {
+  //     AuthApi.token(token).then((data) => {
+  //       if (data) {
+  //         console.log();
+  //         setUserEmail(data.data.email)
+  //         setLoggedIn(true);
+  //         navigate("/", {replace: true});
+  //       }
+  //     });
+  //   }
+  // }
   function handleTokenCheck() {
-    const token = localStorage.getItem("jwt");
+    const token = document.cookie
+      .split("; ")
+      .find((row) => row.startsWith("jwt="))
+      ?.split("=")[1];
+
     if (token) {
       AuthApi.token(token).then((data) => {
         if (data) {
-          console.log();
-          setUserEmail(data.data.email)
+          setUserEmail(data.data.email);
           setLoggedIn(true);
-          navigate("/", {replace: true});
+          navigate("/", { replace: true });
         }
       });
     }

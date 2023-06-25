@@ -7,7 +7,8 @@ class ApiConfig {
   getCard() {
     return fetch(`${this._baseUrl}/cards`, {
       method: 'GET',
-      headers: this._headers
+      headers: this._headers,
+      credentials: 'include'
     }).then(res => this._checkResponse(res))
   }
 
@@ -15,6 +16,7 @@ class ApiConfig {
     return fetch(`${this._baseUrl}/cards`, {
       method: 'POST',
       headers: this._headers,
+      credentials: 'include',
       body: JSON.stringify({ name, link })
     }).then(res => this._checkResponse(res))
   }
@@ -22,14 +24,16 @@ class ApiConfig {
   setDeleteCard(id) {
     return fetch(`${this._baseUrl}/cards/${id}`, {
       method: 'DELETE',
-      headers: this._headers
+      headers: this._headers,
+      credentials: 'include'
     }).then(res => this._checkResponse(res))
   }
 
   getUserInfo() {
     return fetch(`${this._baseUrl}/users/me`, {
       method: 'GET',
-      headers: this._headers
+      headers: this._headers,
+      credentials: 'include'
     }).then(res => this._checkResponse(res))
   }
 
@@ -37,6 +41,7 @@ class ApiConfig {
     return fetch(`${this._baseUrl}/users/me`, {
       method: 'PATCH',
       headers: this._headers,
+      credentials: 'include',
       body: JSON.stringify(data)
     }).then(res => this._checkResponse(res))
   }
@@ -45,6 +50,7 @@ class ApiConfig {
     return fetch(`${this._baseUrl}/users/me/avatar`, {
       method: 'PATCH',
       headers: this._headers,
+      credentials: 'include',
       body: JSON.stringify(data)
     }).then(res => this._checkResponse(res))
   }
@@ -52,14 +58,16 @@ class ApiConfig {
   setLike(id){
     return fetch(`${this._baseUrl}/cards/${id}/likes`, {
       method: 'PUT',
-      headers: this._headers
+      headers: this._headers,
+      credentials: 'include'
     }).then(res => this._checkResponse(res))
   }
 
   deleteLike(id){
     return fetch(`${this._baseUrl}/cards/${id}/likes`, {
       method: 'DELETE',
-      headers: this._headers
+      headers: this._headers,
+      credentials: 'include'
     }).then(res => this._checkResponse(res))
   }
   _checkResponse(res) {
@@ -68,9 +76,8 @@ class ApiConfig {
 }
 
 const api = new ApiConfig({
-  baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-62',
+  baseUrl: 'https://api.daily-pix.nomoreparties.sbs',
   headers: {
-    authorization: '8a11f491-8e8d-4f21-8a97-06c1a42ecab4',
     'Content-Type': 'application/json'
   }
 });
