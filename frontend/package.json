@@ -20,22 +20,6 @@
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/KirillEvo/react-mesto-auth.git"
-  },
-  "author": "Kirill Dvoryaninov",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/KirillEvo/react-mesto-auth/issues"
-  },
-  "homepage": "https://kirillevo.github.io/react-mesto-auth/",
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
-  },
   "browserslist": {
     "production": [
       ">0.2%",

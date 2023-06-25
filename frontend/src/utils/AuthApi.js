@@ -26,7 +26,8 @@ class AuthApi {
     return fetch(`${this._baseUrl}/users/me`, {
       method: 'GET',
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        credentials: 'include',
       },
       credentials: 'include'
     }).then(res => this._checkResponse(res))
@@ -38,7 +39,7 @@ class AuthApi {
 }
 
 const api = new AuthApi({
-  baseUrl: 'https://auth.nomoreparties.co',
+  baseUrl: 'https://api.daily-pix.nomoreparties.sbs',
   headers: {
     'Accept': 'application/json',
     'Content-Type': 'application/json'
