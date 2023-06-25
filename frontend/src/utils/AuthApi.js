@@ -7,8 +7,8 @@ class AuthApi {
   register(email, password) {
     return fetch(`${this._baseUrl}/signup`, {
       method: 'POST',
-      headers: this._headers,
       credentials: 'include',
+      headers: this._headers,
       body: JSON.stringify({ email, password })
     }).then(res => this._checkResponse(res))
   }
@@ -16,8 +16,8 @@ class AuthApi {
   login(email, password) {
     return fetch(`${this._baseUrl}/signin`, {
       method: 'POST',
-      headers: this._headers,
       credentials: 'include',
+      headers: this._headers,
       body: JSON.stringify({ email, password })
     }).then(res => this._checkResponse(res))
   }
@@ -25,11 +25,10 @@ class AuthApi {
   token(token) {
     return fetch(`${this._baseUrl}/users/me`, {
       method: 'GET',
+      credentials: 'include',
       headers: {
-        'Content-Type': 'application/json',
-        credentials: 'include',
-      },
-      credentials: 'include'
+        'Content-Type': 'application/json'
+      }
     }).then(res => this._checkResponse(res))
   }
 
@@ -41,7 +40,6 @@ class AuthApi {
 const api = new AuthApi({
   baseUrl: 'https://api.daily-pix.nomoreparties.sbs',
   headers: {
-    'Accept': 'application/json',
     'Content-Type': 'application/json'
   }
 });
