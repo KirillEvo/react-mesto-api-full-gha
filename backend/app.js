@@ -1,14 +1,13 @@
 require('dotenv').config();
 const express = require('express');
 const cookieParser = require('cookie-parser');
-const cors = require('cors');
 // const rateLimit = require('express-rate-limit');
 const mongoose = require('mongoose');
 const { errors } = require('celebrate');
 const helmet = require('helmet');
 const routes = require('./routes');
 const auth = require('./middlewares/auth');
-
+const cors = require('./middlewares/cors');
 // const { requestLogger, errorLogger } = require('./middlewares/logger');
 
 // const { MONGO_URL } = process.env;
@@ -27,7 +26,7 @@ mongoose.connect('mongodb://127.0.0.1:27017/mestodb', {
 });
 
 app.use(cookieParser());
-app.use(cors());
+
 // const limiter = rateLimit({
 //   windowMs: 15 * 60 * 1000,
 //   max: 100,
@@ -35,28 +34,7 @@ app.use(cors());
 //   legacyHeaders: false,
 // });
 
-// const allowedCors = [
-//   'http://daily-pix.nomoreparties.sbs',
-//   'https://daily-pix.nomoreparties.sbs',
-//   'http://localhost:3000',
-//   'https://localhost:3000',
-//   'localhost:3000',
-// ];
-
-// app.use((req, res, next) => {
-//   const { origin } = req.headers;
-//   const { method } = req;
-//   res.header('Access-Control-Allow-Credentials', true);
-
-//   if (allowedCors.includes(origin)) {
-//     res.header('Access-Control-Allow-Origin', origin);
-//   }
-
-//   if (method === 'OPTIONS') {
-
-//   }
-//   next();
-// });
+app.use(cors);
 
 // app.use(requestLogger);
 app.post('/signin', validateLogin, login);
