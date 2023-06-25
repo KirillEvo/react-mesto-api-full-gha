@@ -16,7 +16,7 @@ const auth = require('./middlewares/auth');
 const { PORT = 3000 } = process.env;
 
 const app = express();
-app.use(cors());
+
 app.use(express.json());
 
 const { validateCreateUser, validateLogin } = require('./middlewares/validation');
@@ -27,7 +27,7 @@ mongoose.connect('mongodb://127.0.0.1:27017/mestodb', {
 });
 
 app.use(cookieParser());
-
+app.use(cors());
 // const limiter = rateLimit({
 //   windowMs: 15 * 60 * 1000,
 //   max: 100,
@@ -35,24 +35,28 @@ app.use(cookieParser());
 //   legacyHeaders: false,
 // });
 
-const allowedCors = [
-  'https://praktikum.tk',
-  'http://praktikum.tk',
-  'http://daily-pix.nomoreparties.sbs',
-  'https://daily-pix.nomoreparties.sbs',
-  'localhost:3000',
-];
+// const allowedCors = [
+//   'http://daily-pix.nomoreparties.sbs',
+//   'https://daily-pix.nomoreparties.sbs',
+//   'http://localhost:3000',
+//   'https://localhost:3000',
+//   'localhost:3000',
+// ];
 
-app.use((req, res, next) => {
-  const { origin } = req.headers;
+// app.use((req, res, next) => {
+//   const { origin } = req.headers;
+//   const { method } = req;
+//   res.header('Access-Control-Allow-Credentials', true);
 
-  res.header('Access-Control-Allow-Credentials', true);
+//   if (allowedCors.includes(origin)) {
+//     res.header('Access-Control-Allow-Origin', origin);
+//   }
 
-  if (allowedCors.includes(origin)) {
-    res.header('Access-Control-Allow-Origin', origin);
-  }
-  next();
-});
+//   if (method === 'OPTIONS') {
+
+//   }
+//   next();
+// });
 
 // app.use(requestLogger);
 app.post('/signin', validateLogin, login);
