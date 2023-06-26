@@ -33,7 +33,7 @@ function Login(props) {
         <input value={formValue.email || ""} onChange={handleChange} name="email" className="authorization__input" placeholder="Email" type="email"></input>
         <input value={formValue.password || ""} onChange={handleChange} name="password" className="authorization__input" placeholder="Пароль" type="password"></input>
       </div>
-        <button to="/sign-in" type="submit" className="authorization__button">Войти</button>
+        <button type="submit" className="authorization__button">Войти</button>
       </form>
     </div>
   )

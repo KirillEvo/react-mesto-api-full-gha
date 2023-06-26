@@ -22,13 +22,11 @@ class AuthApi {
     }).then(res => this._checkResponse(res))
   }
 
-  token(token) {
+  token() {
     return fetch(`${this._baseUrl}/users/me`, {
       method: 'GET',
       credentials: 'include',
-      headers: {
-        'Content-Type': 'application/json'
-      }
+      headers: this._headers
     }).then(res => this._checkResponse(res))
   }
 

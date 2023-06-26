@@ -1,4 +1,4 @@
-// 400
+// 401
 class UnauthorizedError extends Error {
   constructor(message) {
     super(message);

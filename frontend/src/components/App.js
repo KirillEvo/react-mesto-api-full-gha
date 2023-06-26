@@ -109,10 +109,12 @@ function App() {
   function userLogin(dataUser) {
     AuthApi.login(dataUser.email, dataUser.password)
       .then((data) => {
-        if (data.token) {
+        if (data) {
+          // const token = localStorage.setItem("jwt", data._id);
+          console.log(data);
           setUserEmail(dataUser.email);
           setLoggedIn(true);
-          localStorage.setItem("jwt", data.token);
+          // localStorage.setItem("jwt", data._id);
           navigate("/", { replace: true });
         }
       })
@@ -129,41 +131,18 @@ function App() {
     navigate("/sign-in", { replace: false });
   }
 
+ function handleTokenCheck() {
+    AuthApi.token()
+    .then((user) => {
+      console.log(user);
+    })
+    .catch((err) => console.log(err));
+  }
+
   useEffect(() => {
     handleTokenCheck();
   }, // eslint-disable-next-line
   []);
-
-
-  // function handleTokenCheck() {
-  //   const token = localStorage.getItem("jwt");
-  //   if (token) {
-  //     AuthApi.token(token).then((data) => {
-  //       if (data) {
-  //         console.log();
-  //         setUserEmail(data.data.email)
-  //         setLoggedIn(true);
-  //         navigate("/", {replace: true});
-  //       }
-  //     });
-  //   }
-  // }
-  function handleTokenCheck() {
-    const token = document.cookie
-      .split("; ")
-      .find((row) => row.startsWith("jwt="))
-      ?.split("=")[1];
-
-    if (token) {
-      AuthApi.token(token).then((data) => {
-        if (data) {
-          setUserEmail(data.data.email);
-          setLoggedIn(true);
-          navigate("/", { replace: true });
-        }
-      });
-    }
-  }
 
   function handleCardLike(card) {
     const isLiked = card.likes.some((i) => i._id === currentUser._id);
