@@ -28,7 +28,7 @@ const getUserById = (req, res, next) => {
 
 function updateUserData(req, res, next, args) {
   User.findByIdAndUpdate(req.user._id, args, { new: true, runValidators: true })
-    .then((user) => { next(res.send({ user })); })
+    .then((user) => { next(res.send(user)); })
     .catch(next);
 }
 
@@ -39,8 +39,6 @@ const updateUser = (req, res, next) => {
 
 const updateUserAvatar = (req, res, next) => {
   const { avatar } = req.body;
-  console.log(avatar);
-  console.log(req.body);
   updateUserData(req, res, next, { avatar });
 };
 
