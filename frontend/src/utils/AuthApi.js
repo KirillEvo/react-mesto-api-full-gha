@@ -23,7 +23,7 @@ class AuthApi {
   }
 
   signOut(){
-    return fetch(`${this._baseUrl}/signin`, {
+    return fetch(`${this._baseUrl}/signout`, {
       method: 'GET',
       credentials: 'include',
       headers: this._headers
