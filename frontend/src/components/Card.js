@@ -24,11 +24,11 @@ class Card extends Component {
   static contextType = CurrentUserContext;
 
   render() {
-    const isOwn = this.props.card.owner._id === this.context._id;
-    const isLiked = this.props.card.likes.some(i => i._id === this.context._id);
+    const isOwn = this.props.card.owner === this.context._id;
+    const isLiked = this.props.card.likes.some(i => i === this.context._id);
     const cardLikeButtonClassName = (
       `element__heart ${isLiked && 'element__heart_black'}`
-    );;
+    );
     return (
       <>
         <article className="element">

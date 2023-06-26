@@ -39,7 +39,7 @@ function App() {
   const [cards, setCards] = useState([]);
 
   useEffect(() => {
-    if (isLoading) {
+    if (loggedIn) {
       Promise.all([Api.getUserInfo(), Api.getCard()])
       .then((values) => {
         const [userData, cardsData] = values;
@@ -50,7 +50,7 @@ function App() {
         console.log(`${err}`);
       });
     }
-  }, [isLoading]);
+  }, [loggedIn]);
 
   function closeAllPopups() {
     setEditAvatarPopupOpen(false);
@@ -137,8 +137,6 @@ function App() {
   }
 
  function handleTokenCheck() {
-    const jwtCookie = document.cookie
-    console.log(jwtCookie);
     AuthApi.token()
     .then((user) => {
       setUserEmail(user.email)
@@ -154,7 +152,7 @@ function App() {
   []);
 
   function handleCardLike(card) {
-    const isLiked = card.likes.some((i) => i._id === currentUser._id);
+    const isLiked = card.likes.some((i) => i === currentUser._id);
     if (!isLiked) {
       Api.setLike(card._id, !isLiked)
         .then((newCard) => {
@@ -191,6 +189,8 @@ function App() {
   }
 
   function handleUpdateUser(data) {
+    console.log(data);
+    console.log(currentUser);
     Api.setUserInfo(data)
       .then((res) => {
         setCurrentUser(res);
@@ -204,6 +204,7 @@ function App() {
   }
 
   function handleUpdateAvatar(data) {
+    console.log(data);
     Api.setUserAvatar(data)
       .then((res) => {
         setCurrentUser(res);

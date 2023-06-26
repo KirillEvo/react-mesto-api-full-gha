@@ -39,6 +39,8 @@ const updateUser = (req, res, next) => {
 
 const updateUserAvatar = (req, res, next) => {
   const { avatar } = req.body;
+  console.log(avatar);
+  console.log(req.body);
   updateUserData(req, res, next, { avatar });
 };
 
