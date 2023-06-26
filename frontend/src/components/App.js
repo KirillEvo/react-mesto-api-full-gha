@@ -126,15 +126,24 @@ function App() {
   }
 
   function signOut(){
-    localStorage.removeItem('jwt');
-    setUserEmail('');
-    navigate("/sign-in", { replace: false });
+    // localStorage.removeItem('jwt');
+    AuthApi.signOut()
+    .then(() => {
+      setLoggedIn(false);
+      setUserEmail('');
+      navigate("/sign-in", { replace: false });
+    })
+    .catch((err) => console.log(err));
   }
 
  function handleTokenCheck() {
+    const jwtCookie = document.cookie
+    console.log(jwtCookie);
     AuthApi.token()
     .then((user) => {
-      console.log(user);
+      setUserEmail(user.email)
+      setLoggedIn(true);
+      navigate("/", {replace: true});
     })
     .catch((err) => console.log(err));
   }

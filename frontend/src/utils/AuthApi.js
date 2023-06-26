@@ -22,6 +22,14 @@ class AuthApi {
     }).then(res => this._checkResponse(res))
   }
 
+  signOut(){
+    return fetch(`${this._baseUrl}/signin`, {
+      method: 'GET',
+      credentials: 'include',
+      headers: this._headers
+    }).then(res => this._checkResponse(res))
+  }
+
   token() {
     return fetch(`${this._baseUrl}/users/me`, {
       method: 'GET',

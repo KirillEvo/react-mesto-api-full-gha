@@ -8,6 +8,10 @@ router.use(express.json());
 const userRoutes = require('./users');
 const cardRoutes = require('./cards');
 
+router.get('/signout', (req, res) => {
+  res.clearCookie('jwt').send({ message: 'Выход' });
+});
+
 router.use('/users', userRoutes);
 router.use('/cards', cardRoutes);
 
