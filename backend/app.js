@@ -1,4 +1,3 @@
-require('dotenv').config();
 const express = require('express');
 const cookieParser = require('cookie-parser');
 // const rateLimit = require('express-rate-limit');
@@ -8,11 +7,8 @@ const helmet = require('helmet');
 const routes = require('./routes');
 const auth = require('./middlewares/auth');
 const cors = require('./middlewares/cors');
+const { MONGO_URL, PORT } = require('./config');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
-
-// const { MONGO_URL } = process.env;
-
-const { PORT = 3000 } = process.env;
 
 const app = express();
 
@@ -21,7 +17,7 @@ app.use(express.json());
 const { validateCreateUser, validateLogin } = require('./middlewares/validation');
 const { createUser, login } = require('./controllers/auth');
 
-mongoose.connect('mongodb://127.0.0.1:27017/mestodb', {
+mongoose.connect(MONGO_URL, {
   useNewUrlParser: true, useUnifiedTopology: true,
 });
 
@@ -35,6 +31,12 @@ app.use(cookieParser());
 // });
 
 app.use(cors);
+
+app.get('/crash-test', () => {
+  setTimeout(() => {
+    throw new Error('Сервер сейчас упадёт');
+  }, 0);
+});
 
 app.use(requestLogger);
 app.post('/signin', validateLogin, login);
