@@ -7,10 +7,13 @@ const helmet = require('helmet');
 const routes = require('./routes');
 const auth = require('./middlewares/auth');
 const cors = require('./middlewares/cors');
+const errorHandler = require('./middlewares/errorHandler');
 const { MONGO_URL, PORT } = require('./config');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 
 const app = express();
+
+app.use(helmet());
 
 app.use(express.json());
 
@@ -46,26 +49,12 @@ app.use(auth);
 app.use(routes);
 
 // app.use(limiter);
-app.use(helmet());
 
 app.use(errorLogger);
 
 app.use(errors());
 
-app.use((err, req, res, next) => {
-  // если у ошибки нет статуса, выставляем 500
-  const { statusCode = 500, message } = err;
-
-  res
-    .status(statusCode)
-    .send({
-      // проверяем статус и выставляем сообщение в зависимости от него
-      message: statusCode === 500
-        ? err.message
-        : message,
-    });
-  next();
-});
+app.use(errorHandler);
 
 app.listen(PORT, () => {
   // console.log(`App listening on port ${PORT}`);

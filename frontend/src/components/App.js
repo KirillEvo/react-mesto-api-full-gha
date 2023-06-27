@@ -218,7 +218,7 @@ function App() {
   function handleAddPlaceSubmit(data) {
     Api.setNewCard(data)
       .then((res) => {
-        setCards([res, ...cards]);
+        setCards((cards) => [res, ...cards]);
         closeAllPopups();
       })
       .catch((err) => {

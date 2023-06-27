@@ -4,7 +4,7 @@ const BadRequest = require('../errors/bad-request');
 
 const getUsers = (req, res, next) => {
   User.find({})
-    .then((users) => res.status(200).send(users))
+    .then((users) => res.send(users))
     .catch(next);
 };
 
@@ -29,7 +29,13 @@ const getUserById = (req, res, next) => {
 function updateUserData(req, res, next, args) {
   User.findByIdAndUpdate(req.user._id, args, { new: true, runValidators: true })
     .then((user) => { next(res.send(user)); })
-    .catch(next);
+    .catch((err) => {
+      if (err.name === 'CastError') {
+        next(new BadRequest('Ошибка 400'));
+      } else {
+        next(err);
+      }
+    });
 }
 
 const updateUser = (req, res, next) => {
@@ -48,7 +54,7 @@ const getUser = (req, res, next) => {
       if (!user) {
         throw new NotFoundError('Пользователь с указанным _id не найден');
       }
-      return res.status(200).send(user);
+      return res.send(user);
     })
     .catch(next);
 };
