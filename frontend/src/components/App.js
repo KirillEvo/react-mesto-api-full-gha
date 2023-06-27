@@ -189,8 +189,6 @@ function App() {
   }
 
   function handleUpdateUser(data) {
-    console.log(data);
-    console.log(currentUser);
     Api.setUserInfo(data)
       .then((res) => {
         setCurrentUser(res);

@@ -8,7 +8,7 @@ const helmet = require('helmet');
 const routes = require('./routes');
 const auth = require('./middlewares/auth');
 const cors = require('./middlewares/cors');
-// const { requestLogger, errorLogger } = require('./middlewares/logger');
+const { requestLogger, errorLogger } = require('./middlewares/logger');
 
 // const { MONGO_URL } = process.env;
 
@@ -36,7 +36,7 @@ app.use(cookieParser());
 
 app.use(cors);
 
-// app.use(requestLogger);
+app.use(requestLogger);
 app.post('/signin', validateLogin, login);
 app.post('/signup', validateCreateUser, createUser);
 
@@ -46,7 +46,7 @@ app.use(routes);
 // app.use(limiter);
 app.use(helmet());
 
-// app.use(errorLogger);
+app.use(errorLogger);
 
 app.use(errors());
 
