@@ -9,7 +9,7 @@
 
 ## Ссылки на проект
 
-IP-адрес 51.250.48.87
+IP 51.250.48.87
 
 Frontend https://daily-pix.nomoreparties.sbs/
 
