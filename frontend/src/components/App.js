@@ -44,7 +44,7 @@ function App() {
       .then((values) => {
         const [userData, cardsData] = values;
         setCurrentUser(userData);
-        setCards(cardsData);
+        setCards(cardsData.reverse());
       })
       .catch((err) => {
         console.log(`${err}`);
